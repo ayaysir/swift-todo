@@ -45,7 +45,7 @@ class AddViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         txtAddDetail.text = ""
         _ = navigationController?.popViewController(animated: true)
         
-        // **
+        // ** 서버에 새로운 todo 추가
         let title = item.title
         let detail = item.detail
         let icon = item.icon
