@@ -65,7 +65,7 @@ class TableViewController: UITableViewController {
 
         // Do any additional setup after loading the view.
         
-        //
+        // ** 서버에서 목록 가져오기
         do {
             let url = URL(string: "http://localhost:8080/todo/get")
             let response = try String(contentsOf: url!)
@@ -75,7 +75,7 @@ class TableViewController: UITableViewController {
             
             let decoded = try JSONDecoder().decode([Todo].self, from: json!)
             itemsFromJSON = decoded
-            print(itemsFromJSON)
+            //print(itemsFromJSON)
             
             
         } catch let e as NSError {
@@ -93,7 +93,7 @@ class TableViewController: UITableViewController {
     
     // 테이블 행의 개수
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(itemsFromJSON.count)
+        // print(itemsFromJSON.count)
         return itemsFromJSON.count
     }
     
@@ -110,9 +110,8 @@ class TableViewController: UITableViewController {
     // 행 삭제
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-//            items.remove(at: (indexPath as NSIndexPath).row)
-//            itemsImageFile.remove(at: (indexPath as NSIndexPath).row)
             
+            // ** 서버에 삭제 명령 보내기
             let id = itemsFromJSON[(indexPath as NSIndexPath).row].id
             let paramText = "id=\(id)"
             
